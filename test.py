@@ -18,5 +18,6 @@ print("i love u 2")
 print("12")
 
 print("34")
+print("78")
 
 print("56")
