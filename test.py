@@ -12,4 +12,8 @@ for word in input:
         print("Grey")
     i+=1
 
+<<<<<<< HEAD
 print("testing")
+=======
+print("testing")
+>>>>>>> parent of 6659187 (testing code)
