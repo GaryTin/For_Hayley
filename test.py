@@ -11,3 +11,5 @@ for word in input:
     else:
         print("Grey")
     i+=1
+
+print("testing")
