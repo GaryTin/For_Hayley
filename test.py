@@ -15,3 +15,4 @@ for word in input:
 print("wtf")
 print("I Love You")
 print("i love u 2")
+print("34")
