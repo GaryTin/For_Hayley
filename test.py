@@ -22,3 +22,5 @@ print("78")
 
 print("56")
 print("Holy")
+
+a = {'B#':"Be Sharp"}
