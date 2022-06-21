@@ -30,9 +30,9 @@ def draw_line(lines,shift,scale):
             t.pu()
         else:
             t.pencolor('green')
-            t.goto(line[0] * scale + shift, shift+line[1] * scale*-1)
+            t.goto(line[0] * scale + shift, shift)
             t.pd()
-            t.goto(line[0] * scale + shift,  shift)
+            t.goto(line[0] * scale + shift,  shift-100)
             t.pu()
 def build_data(buildings):
     l=[]
@@ -47,7 +47,7 @@ def build_data(buildings):
 def maxheight(x):
     max = 0
     for building in buildings:
-        if (x>=building[0] and x<=building[1]) and (building[2]>max):
+        if (x>=building[0] and x<building[1]) and (building[2]>max):
             max = building[2]
     return max
 
@@ -55,37 +55,36 @@ def maxheight(x):
 def sil(p,q):
     m = floor((p+q)/2)
     if p == q:
-        return [(l[p],h[p]),(r[p],-h[p])]
+        return [(l[p],h[p]),(r[p],0)]
     else:
         left_result = sil(p,m)
         right_result = sil(m+1,q)
-        left_len = len(left_result) -1
-        right_len = len(right_result) -1
+        left_len = len(left_result) - 1
+        right_len = len(right_result) - 1
         left_pt = 0
         right_pt = 0
 
         final_result = []
-        while (left_pt <= left_len) and (right_pt<=right_len):
-            if left_result[left_pt][0] < right_result[right_pt][0]:
-                if left_result[left_pt][1]>0:
-                    if maxheight(left_result[left_pt][0])==(left_result[left_pt][1]):
-                        final_result.append(left_result[left_pt])
-                elif left_result[left_pt][1]<0:
-                    if maxheight(left_result[left_pt][0])==(left_result[left_pt][1] * -1):
-                        final_result.append(left_result[left_pt])
 
-                left_pt = left_pt + 1
+        while (left_pt <= left_len) and (right_pt <= right_len):
+            if left_result[left_pt][0] < right_result[right_pt][0]: #take item with smaller x
+                if (maxheight(left_result[left_pt][0]) == (left_result[left_pt][1])) and (len(final_result)==0 or final_result[-1][1]!=left_result[left_pt][1]):
+                    final_result.append(left_result[left_pt])
+                elif (left_result[left_pt][1]) ==0:
+                    temp = (left_result[left_pt][0],maxheight(left_result[left_pt][0]))
+                    final_result.append(temp)
+                left_pt = left_pt +1
             else:
-                if right_result[right_pt][1] > 0:
-                    if maxheight(right_result[right_pt][0]) == (right_result[right_pt][1]):
-                        final_result.append(right_result[right_pt])
+                if maxheight(right_result[right_pt][0]) == (right_result[right_pt][1]) and (len(final_result)==0 or final_result[-1][1]!=right_result[right_pt][1]):
+                    final_result.append(right_result[right_pt])
+                elif (right_result[right_pt][1]) ==0:
+                    temp = (right_result[right_pt][0],maxheight(right_result[right_pt][0]))
+                    final_result.append(temp)
+                right_pt = right_pt +1
 
-                elif right_result[right_pt][1] < 0:
-                    if maxheight(right_result[right_pt][0]) == (right_result[right_pt][1] * -1):
-                        final_result.append(right_result[right_pt])
-                right_pt = right_pt + 1
 
-        if (right_pt<=right_len):
+
+        if (right_pt <= right_len):
             final_result.extend(right_result[right_pt::])
         else:
             final_result.extend(left_result[left_pt::])
@@ -96,6 +95,8 @@ def sil(p,q):
 if __name__ == "__main__":
     buildings = [[1,4,2],[8,9,5],[7,10,3],[3,6,3],[2,5,4]] #[1,4,2],[8,9,5],[7,10,3],[3,6,3],[2,5,4]
     l,r,h = build_data(buildings)
+    #for i in range(11):
+    #    print(maxheight(i))
     draw_buildings(buildings,-500,100)
     result = sil(0,len(buildings)-1)
     print(result)
