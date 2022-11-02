@@ -32,10 +32,11 @@ class Dog(Animal):
         def dance(self):
             print(":)? Dance why the fk i need to dance")
     """
-    def dance(self):
+    
+    def dance(self,happy_level):
         print("I love to dance happy dance")
+        print(happy_level)
 
-dog = Dog()
-dog.who()
-dog.set_name("Halo")
-dog.who()
+
+d = Dog()
+d.dance(30)
