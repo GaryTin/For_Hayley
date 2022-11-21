@@ -7,5 +7,7 @@ if __name__=='__main__':
     if end == -1:
         end = len(text)
     print(text[start:end])
-    print("ily")
     print("123")
+    print("this is my part")
+    print("I love you im Gary")
+    print("ily")
