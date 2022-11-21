@@ -13,3 +13,6 @@ if __name__=='__main__':
     print("ily")
     print("hey")
     print("456")
+
+    print("haha")
+    print("haha")
