@@ -11,3 +11,5 @@ if __name__=='__main__':
     print("this is my part")
     print("I love you im Gary")
     print("ily")
+    print("hey")
+    print("456")
